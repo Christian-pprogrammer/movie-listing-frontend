@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import getError from '../utils/getError';
 
 function AddMovie() {
 
@@ -43,12 +44,9 @@ function AddMovie() {
         releaseDate
       })
       alert('movie created successfully');
-      navigate('/movies')
+      navigate('/movies');
     }catch(err) {
-      dispatch({
-        type: 'SET_ERROR',
-        payload: err
-      })
+      alert(getError(err));
     }
   }
 
@@ -78,12 +76,13 @@ function AddMovie() {
               <label htmlFor="rating">
                 Rating
               </label>
-              <input 
-                type='text' 
-                className='form-control' 
-                value={rating}
-                onChange={(e)=>setRating(e.target.value)} 
-                required />
+              <select name="rating" id="rating" className='form-control' value={rating} onChange={(e)=>setRating(e.target.value)}>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+              </select>
             </div>
             <div className="genre mb-3">
               <label htmlFor="genre">

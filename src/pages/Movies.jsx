@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import getError from '../utils/getError';
 
 function Movies() {
   const [movies, setMovies] = useState([]);
@@ -21,11 +22,13 @@ function Movies() {
   }
   const deleteMovie = async (id) => {
     try{
-      const res = await axios.delete(`/movies/favourite-movies/${id}`)
-      alert(res.data.message);
-      setMovies(()=>movies.filter((movie)=>movie.id != id))
+      if(window.confirm('Are you sure?')) {
+        const res = await axios.delete(`/movies/favourite-movies/${id}`)
+        alert(res.data.message);
+        setMovies(()=>movies.filter((movie)=>movie.id !== id))
+      };
     }catch(err) {
-
+      alert(getError(err));
     }
   }
   const fetchMovies = async () => {
@@ -34,7 +37,7 @@ function Movies() {
       setMovies(res.data);
       console.log(res.data)
     }catch(err) {
-      console.log(err);
+      alert(getError(err))
     }
   }
   const addMovie = () => {
@@ -91,7 +94,9 @@ function Movies() {
                   <button className='btn btn-primary' onClick={()=>editMovie(movie.id)}>Edit</button>
                 </td>
                 <td style={{verticalAlign: 'middle'}}>
-                  <button className='btn btn-danger' onClick={()=>deleteMovie(movie.id)}>Delete</button>
+                  <button 
+                    className='btn btn-danger' 
+                    onClick={()=>deleteMovie(movie.id)}>Delete</button>
                 </td>
               </tr>
               ))

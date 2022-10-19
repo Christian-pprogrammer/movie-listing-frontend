@@ -96,12 +96,13 @@ function EditMovie() {
               <label htmlFor="rating">
                 Rating
               </label>
-              <input 
-                type='text' 
-                className='form-control' 
-                value={rating}
-                onChange={(e)=>setRating(e.target.value)} 
-                required />
+              <select name="rating" id="rating" className='form-control' value={rating} onChange={(e)=>setRating(e.target.value)}>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+              </select>
             </div>
             <div className="genre mb-3">
               <label htmlFor="genre">
