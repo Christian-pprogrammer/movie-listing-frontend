@@ -34,7 +34,7 @@ function Login() {
     }catch(err) {
       dispatch({
         type: 'SET_ERROR',
-        payload: getError(err)
+        payload: err
       })
     }
   }
