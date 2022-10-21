@@ -7,6 +7,7 @@ import getError from '../utils/getError';
 
 function AddMovie() {
 
+  const [loading, setLoading] = useState(false);
   const [movieName, setMovieName] = useState('');
   const [rating, setRating] = useState('');
   const [cast, setCast] = useState([]);
@@ -32,9 +33,7 @@ function AddMovie() {
 
   const submit = async (e) => {
     e.preventDefault();
-    dispatch({
-      type: 'SET_LOADING'
-    })
+    setLoading(true);
     try{
       await axios.post(`/movies`, {
         movieName,
@@ -48,6 +47,7 @@ function AddMovie() {
     }catch(err) {
       alert(getError(err));
     }
+    setLoading(false);
   }
 
   const removeCastItem = (item) => {
@@ -125,8 +125,8 @@ function AddMovie() {
                 required />
             </div>
 
-            <button type='submit' className='btn btn-primary btn-block'>
-              Add Movie
+            <button type='submit' className='btn btn-primary btn-block' disabled={loading}>
+              {loading ? 'Loading...':'Add Movie'}
             </button>
           </form>
         </div>

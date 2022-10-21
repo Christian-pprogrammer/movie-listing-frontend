@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 function Navbar() {
   const {state, dispatch} = useContext(UserContext);
+  const location = useLocation();
+  const {pathname} = location;
   const navigate = useNavigate();
   const logout = () => {
     dispatch({
@@ -24,15 +26,15 @@ function Navbar() {
           <ul className="navbar-nav ml-auto">
             {
               !state.token ? (<>
-                <li className="nav-item active">
+                <li className={`nav-item ${pathname === '/register' ? 'active':''}`}>
                   <Link className="nav-link" to="/register">Register<span className="sr-only">(current)</span></Link>
                 </li>
-                <li className="nav-item">
+                <li className={`nav-item ${pathname === '/login' ? 'active':''}`}>
                   <Link className="nav-link" to="/login">Login</Link>
                 </li>
               </>):(
                 <>
-                  <li>
+                  <li className={`nav-item ${pathname === '/movies' || pathname === '/add-movie' ? 'active':''}`}>
                     <Link className="nav-link" to="/movies">Movies</Link>
                   </li>
                   <li className="nav-item">

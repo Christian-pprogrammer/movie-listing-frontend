@@ -11,6 +11,7 @@ function EditMovie() {
     fetchMovie();
   }, [params.id])
 
+  const [loading, setLoading] = useState(false);
   const [movieName, setMovieName] = useState('');
   const [rating, setRating] = useState('');
   const [cast, setCast] = useState([]);
@@ -34,9 +35,7 @@ function EditMovie() {
 
   const submit = async (e) => {
     e.preventDefault();
-    dispatch({
-      type: 'SET_LOADING'
-    })
+    setLoading(true)
     try{
       await axios.put(`/movies/favourite-movies/${params.id}`, {
         movieName,
@@ -53,6 +52,7 @@ function EditMovie() {
         payload: err
       })
     }
+    setLoading(false);
   }
   const fetchMovie = async (id) => {
     try{
@@ -145,8 +145,8 @@ function EditMovie() {
                 required />
             </div>
 
-            <button type='submit' className='btn btn-primary btn-block'>
-              Edit Movie
+            <button type='submit' className='btn btn-primary btn-block' disabled={loading}>
+              {loading ? 'Loading...':'Edit Movie'}
             </button>
           </form>
         </div>

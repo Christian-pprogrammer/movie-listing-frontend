@@ -10,6 +10,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const {state, dispatch} = useContext(UserContext);
+  console.log(state.loading)
   useEffect(() => {
     if(state.token) {
       navigate('/movies')
@@ -68,8 +69,10 @@ function Login() {
                 onChange={(e)=>setPassword(e.target.value)} 
                 required />
             </div>
-            <button type='submit' className='btn btn-primary btn-block'>
-              Login
+            <button type='submit' className='btn btn-primary btn-block' disabled={state.loading}>
+              {
+                state.loading ? 'Loading...':'Login'
+              }
             </button>
           </form>
         </div>

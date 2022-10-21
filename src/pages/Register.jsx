@@ -67,8 +67,10 @@ function Register() {
                 onChange={(e)=>setPassword(e.target.value)} 
                 required />
             </div>
-            <button type='submit' className='btn btn-primary btn-block'>
-              Register
+            <button type='submit' className='btn btn-primary btn-block' disabled={state.loading}>
+              {
+                state.loading ? 'Loading...':'Register'
+              }
             </button>
           </form>
         </div>

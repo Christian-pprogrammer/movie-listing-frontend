@@ -32,6 +32,7 @@ function Movies() {
     }
   }
   const fetchMovies = async () => {
+    setLoading(true);
     try{
       const res = await axios.get('/movies/favourite-movies');
       setMovies(res.data);
@@ -39,6 +40,7 @@ function Movies() {
     }catch(err) {
       alert(getError(err))
     }
+    setLoading(false);
   }
   const addMovie = () => {
     navigate('/add-movie')
@@ -65,6 +67,18 @@ function Movies() {
             </tr>
           </thead>
           <tbody>
+            {
+              loading && <tr>
+                <td colSpan={7}>Loading movies...</td>
+              </tr>
+            }
+            {
+              !loading && movies.length === 0 && (
+                <tr>
+                  <td colSpan={7}>No movies available</td>
+                </tr>
+              )
+            }
             {
               movies.map((movie) => (
               <tr key={movie.id}>
