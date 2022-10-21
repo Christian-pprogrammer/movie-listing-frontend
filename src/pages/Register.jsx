@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
@@ -9,6 +9,11 @@ function Register() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const {state, dispatch} = useContext(UserContext);
+  useEffect(()=>{
+    if(state.token) {
+      navigate('/movies');
+    }
+  }, [])
   const submit = async (e) => {
     e.preventDefault();
     dispatch({
