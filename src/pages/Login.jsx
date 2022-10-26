@@ -6,14 +6,14 @@ import { UserContext } from '../context/UserContext';
 import getError from '../utils/getError';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const {state, dispatch} = useContext(UserContext);
   console.log(state.loading)
   useEffect(() => {
     if(state.token) {
-      navigate('/movies')
+      navigate('/cars')
     }
   }, []) 
   
@@ -24,14 +24,14 @@ function Login() {
     })
     try{
       const res = await axios.post('/auth/login', {
-        email,
+        username,
         password
       })
       dispatch({
         type: 'SET_USER_INFO',
         payload: res.data
       })
-      navigate('/movies')
+      navigate('/cars')
     }catch(err) {
       dispatch({
         type: 'SET_ERROR',
@@ -47,15 +47,15 @@ function Login() {
         </div>
         <div className="card-body">
           <form onSubmit={submit}>
-            <div className="email mb-3">
-              <label htmlFor="email">
-                Email
+            <div className="username mb-3">
+              <label htmlFor="username">
+                Username
               </label>
               <input 
                 type='text' 
                 className='form-control' 
-                value={email}
-                onChange={(e)=>setEmail(e.target.value)} 
+                value={username}
+                onChange={(e)=>setUsername(e.target.value)} 
                 required />
             </div>
             <div className="password mb-3">

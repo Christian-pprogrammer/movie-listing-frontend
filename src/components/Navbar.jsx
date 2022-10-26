@@ -17,7 +17,7 @@ function Navbar() {
     <nav className="mb-5 navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Movie List
+          Admin Dashboard
         </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -26,17 +26,24 @@ function Navbar() {
           <ul className="navbar-nav ml-auto">
             {
               !state.token ? (<>
-                <li className={`nav-item ${pathname === '/register' ? 'active':''}`}>
-                  <Link className="nav-link" to="/register">Register<span className="sr-only">(current)</span></Link>
-                </li>
                 <li className={`nav-item ${pathname === '/login' ? 'active':''}`}>
                   <Link className="nav-link" to="/login">Login</Link>
                 </li>
               </>):(
                 <>
-                  <li className={`nav-item ${pathname === '/movies' || pathname === '/add-movie' ? 'active':''}`}>
-                    <Link className="nav-link" to="/movies">Movies</Link>
+                  <li className={`nav-item ${pathname === '/cars' ? 'active':''}`}>
+                    <Link className="nav-link" to="/cars">Cars</Link>
                   </li>
+                  <li className={`nav-item ${pathname === '/users' ? 'active':''}`}>
+                    <Link className="nav-link" to="/users">Users<span className="sr-only">(current)</span></Link>
+                  </li>
+                  <li className={`nav-item ${pathname === '/add-user' ? 'active':''}`}>
+                    <Link className="nav-link" to="/phones">Phones<span className="sr-only">(current)</span></Link>
+                  </li>
+                  <li className={`nav-item ${pathname === '/accidents' ? 'active':''}`}>
+                    <Link className="nav-link" to="/accidents">Accidents<span className="sr-only">(current)</span></Link>
+                  </li>
+
                   <li className="nav-item">
                     <a 
                       className="nav-link" 

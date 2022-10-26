@@ -6,7 +6,7 @@ div.main-container {
   min-height: 100%;
 }
 
-div.movie-title {
+div.car-title {
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;

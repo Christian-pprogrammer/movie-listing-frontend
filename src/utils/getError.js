@@ -4,7 +4,10 @@ export default function getError(err) {
     return err.response.data.message;
   }else if(err.response?.data?.errors) {
     return err.response.data.errors[0].message
-  }else{
+  }else if(err.response?.data?.error && typeof(err.response?.data?.error) === "string") {
+    return err.response?.data?.error
+  }
+  else{
     return err.message;
   }
 }

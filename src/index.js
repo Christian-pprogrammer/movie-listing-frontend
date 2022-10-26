@@ -6,7 +6,7 @@ import App from './App';
 
 axios.interceptors.request.use((request=>{
   let apiUrl = request.url;
-  request.url = `https://movie-listing-app-backend.herokuapp.com/api/v1${apiUrl}`;
+  request.url = `https://accidents-tracker.herokuapp.com/api/v1${apiUrl}`;
   if(localStorage.getItem("token")) {
     request.headers.Authorization = `Bearer ${ JSON.parse(localStorage.getItem("token"))}`
   }
